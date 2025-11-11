@@ -1,0 +1,47 @@
+.sidebar {
+  width: 230px;
+  background: var(--sidebar);
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+}
+
+.sidebar .logo {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 6px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: var(--accent);
+  color: white;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toggle-theme {
+  width: 200px;
+  margin-top: auto;
+  margin-bottom: 70px;
+  padding: 8px;
+  border: none;
+  background: var(--accent);
+  color: darkblue;
+  border-radius: 6px;
+  cursor: pointer;
+}
