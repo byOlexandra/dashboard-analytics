@@ -1,6 +1,6 @@
 .top-bar {
     position: absolute;
-    top: 0;
+    top: 15px;
     left: 230px;
     right: 0;
     height: 60px;
@@ -10,21 +10,36 @@
     padding: 0 20px;
 }
 
-.top-bar input {
+.input-container input {
     padding: 8px;
-    padding-left: 30px;
-    width: 250px;
+    padding-left: 36px;
+    width: 450px;
+    font-size: 16px;
     background-color: var(--bg);
-    border: none;
+    color: var(--text);
+    border: 1px solid var(--accent);
     border-radius: 4px;
+    transition: background-color 350ms ease-in-out, color 350ms ease-in-out;
 }
 
 .input-container {
     position: relative;
 }
 
+.input-container input:hover, 
+.input-container input:focus {
+    background-color: var(--accent);
+    color: var(--text);
+    outline: none;
+}
+
+.input-container input:hover::placeholder,
+.input-container input:focus::placeholder {
+    color: var(--text);
+}
+
 .input-search-icon {
     position: absolute;
-    top: 8px;
+    top: 10px;
     left: 14px;
 }
