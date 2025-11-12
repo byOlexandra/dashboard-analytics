@@ -43,7 +43,7 @@ nav {
   padding: 8px;
   border: none;
   background: var(--accent);
-  color: darkblue;
+  color: var(--text);
   border-radius: 6px;
   cursor: pointer;
 }
