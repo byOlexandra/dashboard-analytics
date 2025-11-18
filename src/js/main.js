@@ -2,6 +2,7 @@ const refs = {
     toggleThemeBtn: document.querySelector(".toggle-theme"),
     menuToggle: document.querySelector("button.menu-toggle"),
     sidebar: document.querySelector(".sidebar"),
+    overlay: document.querySelector(".overlay"),
 }
 
 if (localStorage.getItem("theme") === "dark") {
@@ -23,11 +24,11 @@ refs.toggleThemeBtn.addEventListener("click", e => {
 
 refs.menuToggle.addEventListener("click", e => {
     e.preventDefault()
-    refs.sidebar.classList.toggle("active")
+    refs.sidebar.classList.toggle("active");
+    refs.overlay.style.display = refs.sidebar.classList.contains("active") ? "block" : "none";
 }) 
 
-document.addEventListener("click", e => {
-    if (!refs.sidebar.contains(e.target) && e.target !== refs.menuToggle) {
+refs.overlay.addEventListener("click", e => {
     refs.sidebar.classList.remove("active");
-    }
+    refs.overlay.style.display = "none";
 })
