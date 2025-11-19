@@ -7,7 +7,7 @@ const refs = {
 
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
-    refs.toggleThemeBtn.textContent = "Light";
+    refs.toggleThemeBtn.textContent = "Light mode";
 } 
 
 refs.toggleThemeBtn.addEventListener("click", e => {
@@ -15,10 +15,10 @@ refs.toggleThemeBtn.addEventListener("click", e => {
     document.body.classList.toggle("dark");
     if (document.body.classList.contains("dark")) {
         localStorage.setItem("theme", "dark");
-        refs.toggleThemeBtn.textContent = "Light";
+        refs.toggleThemeBtn.textContent = "Light mode";
     } else {
         localStorage.setItem("theme", "light");
-        refs.toggleThemeBtn.textContent = "Dark";
+        refs.toggleThemeBtn.textContent = "Dark mode";
     }
 })
 
