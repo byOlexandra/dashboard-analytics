@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/dashboard-analytics/favicon.svg"/>
@@ -11,20 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <script type="module" crossorigin src="/dashboard-analytics/index.js"></script>
-  <link rel="stylesheet" crossorigin href="/dashboard-analytics/assets/styles-BTR6Tkul.css">
+  <link rel="stylesheet" crossorigin href="/dashboard-analytics/assets/index-BTR6Tkul.css">
 </head>
-<body>
-    <div class="container">
-        <main class="main">
+<body>    
+    <main class="main">
+
+        <div class="container"></div>
+
             <button class="menu-toggle"><svg width="20" height="20"><use href="/dashboard-analytics/assets/sprite-B3F5ci62.svg#icon-menu"></use></svg></button>
 <aside class="sidebar">
   <div class="logo">MyDash</div>
   <nav>
-    <a href="#" class="active">Dashboard</a>
-    <a href="">Analytics</a>
-    <a href="">Users</a>
-    <a href="">Sales</a>
-    <a href="">Settings</a>
+    <a href="#" data-page="dashboard" class="active">Dashboard</a>
+    <a href="#" data-page="analytics">Analytics</a>
+    <a href="#" data-page="users">Users</a>
+    <a href="#" data-page="sales">Sales</a>
+    <a href="#" data-page="settings">Settings</a>
   </nav>
   <button class="toggle-theme" type="button">Dark mode</button>
 </aside>
@@ -59,9 +60,9 @@
         </li>
     </ul>
 </header>
-        </main>
-    </div> 
+            
+        </div>
 
+    </main>    
 </body>
-
 </html>
