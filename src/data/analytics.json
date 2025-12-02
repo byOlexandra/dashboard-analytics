@@ -1,0 +1,14 @@
+{
+    "trafficSources": {
+        "labels": ["Organic", "Paid", "Referral", "Social"],
+        "values": [45, 25, 20, 10]
+    },
+    "userRetention": {
+        "labels": ["Day 1", "Day 7", "Day 14", "Day 30"],
+        "values": [38, 22, 15, 8]
+    },
+    "deviceUsage": {
+        "labels": ["Desktop", "Mobile", "Tablet"],
+        "values": [52, 42, 6]
+    }
+}

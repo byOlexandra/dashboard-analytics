@@ -1,0 +1,15 @@
+{
+    "ageGroups": {
+        "labels": ["18-24", "25-34", "35-44", "45+"],
+        "values": [35, 40, 17, 8]
+    },
+    "newUsersMonthly": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "values": [320, 280, 450, 500, 470, 520]
+    },
+    "recentUsers": [
+        { "id": 1, "name": "Olena", "email": "olena@example.com", "joined": "2025-01-21" },
+        { "id": 2, "name": "Dmytro", "email": "dmytro@example.com", "joined": "2025-01-20" },
+        { "id": 3, "name": "Iryna", "email": "iryna@example.com", "joined": "2025-01-20" }
+    ]
+}

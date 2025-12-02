@@ -1,0 +1,15 @@
+{
+    "monthlySales": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "values": [1200, 1350, 1600, 1800, 1750, 2100]
+    },
+    "topProducts": [
+        { "name": "Premium Plan", "sold": 820 },
+        { "name": "Pro Plan", "sold": 620 },
+        { "name": "Starter Plan", "sold": 450 }
+    ],
+    "salesChannels": {
+        "labels": ["Website", "Mobile App", "Partners"],
+        "values": [60, 30, 10]
+    }
+}

@@ -59,3 +59,10 @@ refs.navLinks.forEach(link => {
 // * DEFAULT PAGE
 
 loadPage("dashboard")
+
+// * LOADING DATA
+
+async function loadData(page) {
+    const response = await fetch(`../data/${page}.json`);
+    return await response.json();
+}

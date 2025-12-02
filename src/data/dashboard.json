@@ -1,0 +1,17 @@
+{
+    "stats": {
+        "totalUsers": 14520,
+        "activeUsers": 9120,
+        "newUsersToday": 120,
+        "revenueToday": 540,
+        "conversionRate": 4.7
+    },
+    "weeklyRevenue": {
+        "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        "values": [420, 380, 510, 460, 600, 540, 580]
+    },
+    "activeSessions": {
+        "labels": ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
+        "values": [90, 120, 300, 450, 420, 250]
+    }
+}
