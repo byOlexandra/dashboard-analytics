@@ -1,0 +1,9 @@
+body {
+    position: relative;
+}
+
+#page-content {
+    position: absolute;
+    top: 100px;
+    left: 150px;
+}

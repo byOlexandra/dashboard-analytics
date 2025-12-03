@@ -1,10 +1,15 @@
+import { createChart } from "./chart.js";
+
+
 const refs = {
     toggleThemeBtn: document.querySelector(".toggle-theme"),
     menuToggle: document.querySelector("button.menu-toggle"),
     sidebar: document.querySelector(".sidebar"),
     overlay: document.querySelector(".overlay"),
     container: document.querySelector(".container"),
-    navLinks: document.querySelectorAll(".sidebar nav a")
+    navLinks: document.querySelectorAll(".sidebar nav a"),
+    content: document.getElementById('page-content'),
+    links: document.querySelectorAll('[data-page]'),
 }
 
 if (localStorage.getItem("theme") === "dark") {
@@ -26,6 +31,8 @@ refs.toggleThemeBtn.addEventListener("click", e => {
     }
 })
 
+// * MOBILE MENU
+
 refs.menuToggle.addEventListener("click", e => {
     e.preventDefault()
     refs.sidebar.classList.toggle("active");
@@ -40,22 +47,34 @@ refs.overlay.addEventListener("click", e => {
 // * LOADING PAGE
 
 async function loadPage(page) {
-    const response = await fetch(`../partials/${page}.html`);
-    const html = await response.text();
-    refs.container.innerHTML = html;
-
-    let data = null;
     try {
-        const dataResponse = await fetch(`../data/${page}.json`);
-        data = await dataResponse.json()
-    } catch (error) {
-        console.warn("No data for this page");
-    }
+        // 1. Завантажуємо HTML
+        const htmlRes = await fetch(`../partials/${page}.html`);
+        if (!htmlRes.ok) throw new Error('Partial not found');
+        const html = await htmlRes.text();
+        refs.content.innerHTML = html;
 
-    if (page === "dashboard") {
-        initDashboard(data)
+        let data = null;
+        try {
+            const dataRes = await fetch(`../data/${page}.json`);
+            if (dataRes.ok) data = await dataRes.json();
+        } catch (e) {
+            console.log(`Немає даних для ${page} — це нормально`);            
+        }
+        const initFunctionName = 'init' + page.charAt(0).toUpperCase() + page.slice(1);
+        if (typeof window[initFunctionName] === 'function') {
+            window[initFunctionName](data);
+        }
+        refs.navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.page === page);
+        });
+
+    } catch (err) {
+        refs.container.innerHTML = `<h2 style="color: red; text-align: center;">Сторінка не знайдена</h2>`;
+        console.error(err);
     }
 }
+
 
 function initDashboard(data) {
     if (!data) return;
@@ -66,33 +85,11 @@ function initDashboard(data) {
     document.querySelector("#revenueToday").textContent = `$${data.stats.revenueToday}`;
 
     createChart("weeklyRevenueChart", data.weeklyRevenue.labels, data.weeklyRevenue.values),
-    createChart("activeSessions", data.activeSessions.labels, data.activeSessions.values)
+    createChart("activeSessionsChart", data.activeSessions.labels, data.activeSessions.values)
 }
 
-function createChart(canvaId, labels, data) {
-    new Chart(document.getElementById(canvaId), {
-        type: "line",
-        data: {
-            labels,
-            datasets: [{
-                label: "",
-                data,
-                borderWidth: 2,
-                // tension:0.4,
-            }]
-        },
-        options: {
-            plugins: {
-                legend: { display: false },
-                // scales: {
-                // y: { beginAtZero: true }
-                // }   
-            }
-        }
-    })
-}
 
-refs.navLinks.forEach(link => {
+refs.links.forEach(link => {
     link.addEventListener("click", e => {
         e.preventDefault()
         refs.navLinks.forEach(link => link.classList.remove("active"));
@@ -103,13 +100,10 @@ refs.navLinks.forEach(link => {
     })
 })
 
-// * DEFAULT PAGE
-
+document.addEventListener('DOMContentLoaded', () => {
+    loadPage('dashboard');
+});
 
 
 // * LOADING DATA
 
-async function loadData(page) {
-    const response = await fetch(`../data/${page}.json`);
-    return await response.json();
-}

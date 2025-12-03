@@ -56,8 +56,12 @@
 }
 
 .sidebar .logo {
+  background-color: transparent;
+  border: none;
   font-size: 18px;
   font-weight: 700;
+  color: var(--text);
+  font-family: inherit;
 }
 
 .sidebar nav a {
