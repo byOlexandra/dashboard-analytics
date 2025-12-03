@@ -43,6 +43,53 @@ async function loadPage(page) {
     const response = await fetch(`../partials/${page}.html`);
     const html = await response.text();
     refs.container.innerHTML = html;
+
+    let data = null;
+    try {
+        const dataResponse = await fetch(`../data/${page}.json`);
+        data = await dataResponse.json()
+    } catch (error) {
+        console.warn("No data for this page");
+    }
+
+    if (page === "dashboard") {
+        initDashboard(data)
+    }
+}
+
+function initDashboard(data) {
+    if (!data) return;
+
+    document.querySelector("#totalUsers").textContent = data.stats.totalUsers;
+    document.querySelector("#activeUsers").textContent = data.stats.activeUsers;
+    document.querySelector("#newUsersToday").textContent = data.stats.newUsersToday;
+    document.querySelector("#revenueToday").textContent = `$${data.stats.revenueToday}`;
+
+    createChart("weeklyRevenueChart", data.weeklyRevenue.labels, data.weeklyRevenue.values),
+    createChart("activeSessions", data.activeSessions.labels, data.activeSessions.values)
+}
+
+function createChart(canvaId, labels, data) {
+    new Chart(document.getElementById(canvaId), {
+        type: "line",
+        data: {
+            labels,
+            datasets: [{
+                label: "",
+                data,
+                borderWidth: 2,
+                // tension:0.4,
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { display: false },
+                // scales: {
+                // y: { beginAtZero: true }
+                // }   
+            }
+        }
+    })
 }
 
 refs.navLinks.forEach(link => {
@@ -58,7 +105,7 @@ refs.navLinks.forEach(link => {
 
 // * DEFAULT PAGE
 
-loadPage("dashboard")
+
 
 // * LOADING DATA
 
