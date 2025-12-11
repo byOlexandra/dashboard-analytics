@@ -1,0 +1,39 @@
+body .dashboard-page {
+    font-size: 21px;
+}
+
+
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2{}
+
+.stats-list {
+    display: flex;
+    gap: 70px;
+    margin-bottom: 30px;
+
+    font-size: 21px;
+}
+
+.stats-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.chart-blocks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.chart-block-list-item h3 {
+    font-size: 18px;
+    text-align: right;
+}

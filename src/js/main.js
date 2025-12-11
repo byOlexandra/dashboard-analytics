@@ -46,9 +46,10 @@ refs.overlay.addEventListener("click", e => {
 
 // * LOADING PAGE
 
+const initRegistry = {};
+
 async function loadPage(page) {
     try {
-        // 1. Завантажуємо HTML
         const htmlRes = await fetch(`../partials/${page}.html`);
         if (!htmlRes.ok) throw new Error('Partial not found');
         const html = await htmlRes.text();
@@ -61,9 +62,10 @@ async function loadPage(page) {
         } catch (e) {
             console.log(`Немає даних для ${page} — це нормально`);            
         }
-        const initFunctionName = 'init' + page.charAt(0).toUpperCase() + page.slice(1);
-        if (typeof window[initFunctionName] === 'function') {
-            window[initFunctionName](data);
+        if (initRegistry[page]) {
+            initRegistry[page](data);
+        } else {
+            console.warn(`Ініціалізатора для сторінки "${page}" не знайдено`);
         }
         refs.navLinks.forEach(link => {
             link.classList.toggle('active', link.dataset.page === page);
@@ -78,6 +80,8 @@ async function loadPage(page) {
 
 function initDashboard(data) {
     if (!data) return;
+    console.log("INIT DASHBOARD ЗАПУЩЕНО!");
+
 
     document.querySelector("#totalUsers").textContent = data.stats.totalUsers;
     document.querySelector("#activeUsers").textContent = data.stats.activeUsers;
@@ -87,6 +91,8 @@ function initDashboard(data) {
     createChart("weeklyRevenueChart", data.weeklyRevenue.labels, data.weeklyRevenue.values),
     createChart("activeSessionsChart", data.activeSessions.labels, data.activeSessions.values)
 }
+
+initRegistry['dashboard'] = initDashboard;
 
 
 refs.links.forEach(link => {
@@ -102,6 +108,7 @@ refs.links.forEach(link => {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadPage('dashboard');
+    // initDashboard('dashboard.json');
 });
 
 
